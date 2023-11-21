@@ -19,6 +19,6 @@ public class MessageDistributionImpl implements MessageDistribution {
         if (chatId == 1L) {
             return messageDistributionByAdmin.distribution(update);
         }
-        return sendMessageFromUser.sendMessage(update);
+        return sendMessageFromUser.sendMessage(update, 1318507437L);
     }
 }
