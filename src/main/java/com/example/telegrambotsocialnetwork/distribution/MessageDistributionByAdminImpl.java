@@ -6,9 +6,15 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Service
 public class MessageDistributionByAdminImpl implements MessageDistributionByAdmin{
+    private Long chatIdUser;
 
     @Override
     public SendMessage distribution(Update update) {
+        if (update.hasCallbackQuery()) {
+            return null;
+        } else if (update.getMessage().hasText()) {
+
+        }
         return null;
     }
 }
