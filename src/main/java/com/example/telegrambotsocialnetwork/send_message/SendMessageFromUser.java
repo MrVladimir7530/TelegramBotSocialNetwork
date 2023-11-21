@@ -3,6 +3,7 @@ package com.example.telegrambotsocialnetwork.send_message;
 import com.example.telegrambotsocialnetwork.configurations.SendBotMessage;
 import com.example.telegrambotsocialnetwork.model.User;
 import com.example.telegrambotsocialnetwork.repository.UsersRepository;
+import com.example.telegrambotsocialnetwork.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -13,13 +14,15 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class  SendMessageFromUser {
     private final SendBotMessage sendBotMessage;
     private final UsersRepository usersRepository;
+    private final UsersService usersService;
 
     public SendMessage sendMessage(Update update, Long chatIdAdmin) {
         Long chatId = update.getMessage().getChatId();
 
         User user = usersRepository.findByChatId(chatId);
         if (user == null) {
-            createNewUser(update);
+            User newUser = createNewUser(update);
+            usersService.saveUsers(newUser);
         }
 
         String textMessage = update.getMessage().getText();

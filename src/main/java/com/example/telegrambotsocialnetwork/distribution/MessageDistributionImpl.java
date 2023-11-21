@@ -16,7 +16,7 @@ public class MessageDistributionImpl implements MessageDistribution {
     @Override
     public SendMessage process(Update update) {
         Long chatId = update.getMessage().getChatId();
-        if (chatId == 1L) {
+        if (chatId == 1318507437L) {
             return messageDistributionByAdmin.distribution(update);
         }
         return sendMessageFromUser.sendMessage(update, 1318507437L);
